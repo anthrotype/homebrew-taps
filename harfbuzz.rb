@@ -37,17 +37,24 @@ class Harfbuzz < Formula
   end
 
   def install
-    args = %W[
+    configure_args = %W[
       --disable-dependency-tracking
       --prefix=#{prefix}
       --enable-introspection=yes
       --with-gobject=yes
     ]
-    system "./autogen.sh" if build.head?
-    args << "--with-icu" if build.with? "icu4c"
-    args << "--with-graphite2" if build.with? "graphite2"
-    system "./configure", *args
-    system "make", "install"
+
+    make_args = %W[]
+
+    if build.head?
+      system "./autogen.sh" if build.head?
+      make_args << "CPPFLAGS+=-DHB_DEFINE_STDINT" if build.head?
+    end
+
+    configure_args << "--with-icu" if build.with? "icu4c"
+    configure_args << "--with-graphite2" if build.with? "graphite2"
+    system "./configure", *configure_args
+    system "make", "install", *make_args
   end
 
   test do
