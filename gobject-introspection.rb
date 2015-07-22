@@ -3,7 +3,6 @@ class GobjectIntrospection < Formula
   homepage "https://live.gnome.org/GObjectIntrospection"
   url "https://download.gnome.org/sources/gobject-introspection/1.44/gobject-introspection-1.44.0.tar.xz"
   sha256 "6f0c2c28aeaa37b5037acbf21558098c4f95029b666db755d3a12c2f1e1627ad"
-  head "https://github.com/GNOME/gobject-introspection.git"
 
   bottle do
     revision 2
@@ -12,10 +11,18 @@ class GobjectIntrospection < Formula
     sha256 "3dcfedfe989ec4d9c6558def0190ef3bd3214bafa4d2f53fd28aa1abbc1403f2" => :mountain_lion
   end
 
+  head do
+    url "https://github.com/GNOME/gobject-introspection.git"
+
+    depends_on "autoconf" => :build
+    depends_on "automake" => :build
+    depends_on "libtool" => :build
+  end
+
   option :universal
 
   depends_on "pkg-config" => :run
-  depends_on "glib"
+  depends_on "anthrotype/taps/glib"
   depends_on "libffi"
 
   resource "tutorial" do
@@ -24,6 +31,8 @@ class GobjectIntrospection < Formula
   end
 
   def install
+    system "./autogen.sh" if build.head?
+
     ENV["GI_SCANNER_DISABLE_CACHE"] = "true"
     ENV.universal_binary if build.universal?
     inreplace "giscanner/transformer.py", "/usr/share", "#{HOMEBREW_PREFIX}/share"
