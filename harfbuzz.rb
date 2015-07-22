@@ -3,12 +3,20 @@ class Harfbuzz < Formula
   homepage "https://wiki.freedesktop.org/www/Software/HarfBuzz/"
   url "http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-0.9.41.tar.bz2"
   sha256 "d81aa53d0c02b437beeaac159d7fc16394d676bbce0860fb6f6a10b587dc057c"
-  head "https://github.com/anthrotype/harfbuzz.git"
 
   bottle do
     sha256 "127226ca79eb2225b2e96a2919541466b4f93a7ead04dbbbf6b605ac2e7deb43" => :yosemite
     sha256 "0ee1b49cbb64c20dfd4ac5822a89e0e85168e249fe24ca7c35b8f8814899682c" => :mavericks
     sha256 "06116bc1ac3ac010211f2c56193e144b242ca4a45988f38637e215be3670e956" => :mountain_lion
+  end
+
+  head do
+    url "https://github.com/anthrotype/harfbuzz.git"
+
+    depends_on "ragel" => :build
+    depends_on "autoconf" => :build
+    depends_on "automake" => :build
+    depends_on "libtool" => :build
   end
 
   depends_on "pkg-config" => :build
@@ -24,9 +32,8 @@ class Harfbuzz < Formula
     sha256 "9535d35dab9e002963eef56757c46881f6b3d3b27db24eefcc80929781856c77"
   end
 
-  patch do
-    url "https://gist.githubusercontent.com/anthrotype/19d4c770875c74431baa/raw/4d77f351e7b855a25f73c7f73929489f27eb7da1/harfbuzz-fix-gi.patch"
-    sha1 "1d4dcbab7b24fabd25f5c3d7fe85ef87685112dc"
+  def patches
+    DATA
   end
 
   def install
@@ -36,7 +43,7 @@ class Harfbuzz < Formula
       --enable-introspection=yes
       --with-gobject=yes
     ]
-
+    system "./autogen.sh" if build.head?
     args << "--with-icu" if build.with? "icu4c"
     args << "--with-graphite2" if build.with? "graphite2"
     system "./configure", *args
@@ -50,3 +57,26 @@ class Harfbuzz < Formula
     end
   end
 end
+
+__END__
+
+diff --git a/src/hb-common.h b/src/hb-common.h
+index d160be5..5eda2a9 100644
+--- a/src/hb-common.h
++++ b/src/hb-common.h
+@@ -61,6 +61,15 @@ typedef __int32 int32_t;
+ typedef unsigned __int32 uint32_t;
+ typedef __int64 int64_t;
+ typedef unsigned __int64 uint64_t;
++#elif defined (HB_DEFINE_STDINT)
++typedef signed char int8_t;
++typedef unsigned char uint8_t;
++typedef short int16_t;
++typedef unsigned short uint16_t;
++typedef int int32_t;
++typedef unsigned uint32_t;
++typedef long long int64_t;
++typedef unsigned long long uint64_t;
+ #else
+ #  include <stdint.h>
+ #endif
