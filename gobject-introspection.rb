@@ -2,7 +2,7 @@ class GobjectIntrospection < Formula
   desc "Generate interface introspection data for GObject libraries"
   homepage "https://live.gnome.org/GObjectIntrospection"
   url "http://download.gnome.org/sources/gobject-introspection/1.45/gobject-introspection-1.45.3.tar.xz"
-  sha256 "http://download.gnome.org/sources/gobject-introspection/1.45/gobject-introspection-1.45.3.tar.xz"
+  sha256 "3583c3ae5fb70065d7ad2942564974fdbd86ac8a28e9bfae4e4d558f7656556e"
 
   # bottle do
   #   revision 2
