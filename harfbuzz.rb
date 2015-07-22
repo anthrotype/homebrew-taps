@@ -49,8 +49,8 @@ class Harfbuzz < Formula
     make_args = %W[]
 
     if build.head?
-      system "./autogen.sh" if build.head?
-      make_args << "CPPFLAGS+=-DHB_DEFINE_STDINT" if build.head?
+      system "./autogen.sh"
+      make_args << "CPPFLAGS+=-DHB_DEFINE_STDINT"
     end
 
     configure_args << "--with-icu" if build.with? "icu4c"
