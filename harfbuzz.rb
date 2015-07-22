@@ -71,22 +71,17 @@ end
 __END__
 
 diff --git a/src/hb-common.h b/src/hb-common.h
-index d160be5..5eda2a9 100644
+index d160be5..5e64ba8 100644
 --- a/src/hb-common.h
 +++ b/src/hb-common.h
-@@ -61,6 +61,15 @@ typedef __int32 int32_t;
- typedef unsigned __int32 uint32_t;
- typedef __int64 int64_t;
- typedef unsigned __int64 uint64_t;
-+#elif defined (HB_DEFINE_STDINT)
-+typedef signed char int8_t;
-+typedef unsigned char uint8_t;
-+typedef short int16_t;
-+typedef unsigned short uint16_t;
-+typedef int int32_t;
-+typedef unsigned uint32_t;
-+typedef long long int64_t;
-+typedef unsigned long long uint64_t;
- #else
- #  include <stdint.h>
+@@ -67,6 +67,10 @@ typedef unsigned __int64 uint64_t;
+ 
  #endif
+ 
++// temporary workaround for bulding python bindings with gobject-introspection
++// https://github.com/behdad/harfbuzz/issues/84 
++typedef signed char int8_t;
++
+ HB_BEGIN_DECLS
+ 
+ 
