@@ -42,6 +42,7 @@ class Harfbuzz < Formula
       --prefix=#{prefix}
       --enable-introspection=yes
       --with-gobject=yes
+      --with-coretext=yes
     ]
 
     make_args = %W[]
