@@ -20,12 +20,12 @@ class Harfbuzz < Formula
   end
 
   depends_on "pkg-config" => :build
-  depends_on "glib"
-  depends_on "cairo"
+  depends_on "anthrotype/taps/glib"
+  depends_on "anthrotype/taps/cairo"
   depends_on "icu4c" => :recommended
   depends_on "graphite2" => :optional
   depends_on "freetype"
-  depends_on "gobject-introspection"
+  depends_on "anthrotype/taps/gobject-introspection"
 
   option "with-coretext", "Compile with CoreText bindings"
 
@@ -50,7 +50,7 @@ class Harfbuzz < Formula
 
     if build.head?
       system "./autogen.sh"
-      make_args << "CPPFLAGS+=-DHB_DEFINE_STDINT"
+      # make_args << "CPPFLAGS+=-DHB_DEFINE_STDINT"
     end
 
     configure_args << "--with-icu" if build.with? "icu4c"
