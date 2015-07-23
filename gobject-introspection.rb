@@ -56,11 +56,11 @@ diff --git a/giscanner/scannerlexer.l b/giscanner/scannerlexer.l
 index 835b92c..78e2bbd 100644
 --- a/giscanner/scannerlexer.l
 +++ b/giscanner/scannerlexer.l
-@@ -165,6 +165,7 @@ stringtext        ([^\\\"])|(\\.)
- "__inline"       { return INLINE; }
- "__nonnull"              { if (!parse_ignored_macro()) REJECT; }
- "_Noreturn"              { /* Ignore */ }
-+"__signed"       { return SIGNED; }
- "__signed__"       { return SIGNED; }
- "__restrict"       { return RESTRICT; }
- "__restrict__"       { return RESTRICT; }
+@@ -165,6 +165,7 @@ stringtext				([^\\\"])|(\\.)
+ "__inline"				{ return INLINE; }
+ "__nonnull" 			        { if (!parse_ignored_macro()) REJECT; }
+ "_Noreturn" 			        { /* Ignore */ }
++"__signed"				{ return SIGNED; }
+ "__signed__"				{ return SIGNED; }
+ "__restrict"				{ return RESTRICT; }
+ "__restrict__"				{ return RESTRICT; }
