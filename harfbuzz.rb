@@ -11,7 +11,7 @@ class Harfbuzz < Formula
   end
 
   head do
-    url "https://github.com/anthrotype/harfbuzz.git"
+    url "https://github.com/behdad/harfbuzz.git"
 
     depends_on "ragel" => :build
     depends_on "autoconf" => :build
