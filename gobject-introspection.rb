@@ -1,8 +1,8 @@
 class GobjectIntrospection < Formula
   desc "Generate interface introspection data for GObject libraries"
   homepage "https://live.gnome.org/GObjectIntrospection"
-  url "http://download.gnome.org/sources/gobject-introspection/1.45/gobject-introspection-1.45.3.tar.xz"
-  sha256 "3583c3ae5fb70065d7ad2942564974fdbd86ac8a28e9bfae4e4d558f7656556e"
+  url "https://download.gnome.org/sources/gobject-introspection/1.44/gobject-introspection-1.44.0.tar.xz"
+  sha256 "6f0c2c28aeaa37b5037acbf21558098c4f95029b666db755d3a12c2f1e1627ad"
 
   head do
     url "https://github.com/GNOME/gobject-introspection.git"
@@ -15,7 +15,7 @@ class GobjectIntrospection < Formula
   option :universal
 
   depends_on "pkg-config" => :run
-  depends_on "anthrotype/taps/glib"
+  depends_on "glib"
   depends_on "libffi"
 
   resource "tutorial" do
