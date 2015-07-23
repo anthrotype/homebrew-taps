@@ -34,30 +34,23 @@ class Harfbuzz < Formula
     sha256 "9535d35dab9e002963eef56757c46881f6b3d3b27db24eefcc80929781856c77"
   end
 
-  def patches
-    DATA
-  end
-
   def install
-    configure_args = %W[
+    args = %W[
       --disable-dependency-tracking
       --prefix=#{prefix}
       --enable-introspection=yes
       --with-gobject=yes
     ]
 
-    make_args = %W[]
-
     if build.head?
       system "./autogen.sh"
-      make_args << "CPPFLAGS+=-DHB_DEFINE_STDINT"
     end
 
-    configure_args << "--with-icu" if build.with? "icu4c"
-    configure_args << "--with-graphite2" if build.with? "graphite2"
-    configure_args << "--with-coretext" if build.with? "coretext"
-    system "./configure", *configure_args
-    system "make", "install", *make_args
+    args << "--with-icu" if build.with? "icu4c"
+    args << "--with-graphite2" if build.with? "graphite2"
+    args << "--with-coretext" if build.with? "coretext"
+    system "./configure", *args
+    system "make", "install"
   end
 
   test do
@@ -67,21 +60,3 @@ class Harfbuzz < Formula
     end
   end
 end
-
-__END__
-
-diff --git a/src/hb-common.h b/src/hb-common.h
-index d160be5..5e64ba8 100644
---- a/src/hb-common.h
-+++ b/src/hb-common.h
-@@ -67,6 +67,10 @@ typedef unsigned __int64 uint64_t;
- 
- #endif
- 
-+// temporary workaround for bulding python bindings with gobject-introspection
-+// https://github.com/behdad/harfbuzz/issues/84 
-+typedef signed char int8_t;
-+
- HB_BEGIN_DECLS
- 
- 
