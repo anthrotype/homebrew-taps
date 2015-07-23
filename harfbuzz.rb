@@ -4,12 +4,6 @@ class Harfbuzz < Formula
   url "http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-0.9.41.tar.bz2"
   sha256 "d81aa53d0c02b437beeaac159d7fc16394d676bbce0860fb6f6a10b587dc057c"
 
-  bottle do
-    sha256 "127226ca79eb2225b2e96a2919541466b4f93a7ead04dbbbf6b605ac2e7deb43" => :yosemite
-    sha256 "0ee1b49cbb64c20dfd4ac5822a89e0e85168e249fe24ca7c35b8f8814899682c" => :mavericks
-    sha256 "06116bc1ac3ac010211f2c56193e144b242ca4a45988f38637e215be3670e956" => :mountain_lion
-  end
-
   head do
     url "https://github.com/behdad/harfbuzz.git"
 
