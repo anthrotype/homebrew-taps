@@ -5,7 +5,7 @@ class Sile < Formula
   sha256 "2223582818df06daa4609cee40a81e8787085ad1795d4b2ce5edbe0663b74e18"
 
   head do
-    url "https://github.com/anthrotype/sile.git", :branch => "fix_bootstrap"
+    url "https://github.com/simoncozens/sile.git"
     depends_on "automake" => :build
     depends_on "autoconf" => :build
     depends_on "libtool" => :build
